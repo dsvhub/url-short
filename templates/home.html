@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>URL Shortener</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Background image and overlay */
+    .bg {
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+                  url('https://source.unsplash.com/1600x900/?technology,code') no-repeat center center fixed;
+      background-size: cover;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Content box */
+    .home-container {
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      text-align: center;
+      max-width: 600px;
+      width: 100%;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    h1 {
+      margin-bottom: 25px;
+    }
+
+    /* Fade-in animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .nav-links .btn {
+      margin: 10px 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="bg">
+    <div class="home-container">
+      <h1 class="display-5">Welcome to the URL Shortener!</h1>
+
+      {% if current_user.is_authenticated %}
+        <p>Hello, <strong>{{ current_user.username }}</strong>!</p>
+        <div class="nav-links">
+          <a href="{{ url_for('dashboard') }}" class="btn btn-primary">Dashboard</a>
+          <a href="{{ url_for('logout') }}" class="btn btn-outline-secondary">Logout</a>
+        </div>
+      {% else %}
+        <div class="nav-links">
+          <a href="{{ url_for('login') }}" class="btn btn-primary">Login</a>
+          <a href="{{ url_for('register') }}" class="btn btn-outline-secondary">Register</a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

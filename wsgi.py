@@ -1,6 +1,4 @@
-import app  # this will import from app.py, not a folder
+import sys
+sys.path.insert(0, './URLshort')
 
-app = app.app  # reference the `Flask` app object inside app.py
-
-if __name__ == "__main__":
-    app.run()
+from app import app
